@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/provider.dart';
 
 class CoveredAreaScreen extends StatefulWidget {
@@ -8,7 +7,6 @@ class CoveredAreaScreen extends StatefulWidget {
   @override
   State<CoveredAreaScreen> createState() => _CoveredAreaScreenState();
 }
-
 class _CoveredAreaScreenState extends State<CoveredAreaScreen> {
   @override
   void initState() {
@@ -18,30 +16,29 @@ class _CoveredAreaScreenState extends State<CoveredAreaScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ServiceProvider>(context);
-
+    final coverarea = Provider.of<ServiceProvider>(context);
     return Scaffold(
       appBar: AppBar(title: const Text("Covered Areas - Baglung")),
       body: Column(
         children: [
           ElevatedButton(
             onPressed: () {
-              provider.getCoveredAreas();
+              coverarea.getCoveredAreas();
             },
             child: const Text("Fetch Covered Areas"),
           ),
           Expanded(
-            child: provider.isLoading
+            child: coverarea.isLoading
                 ? const Center(child: CircularProgressIndicator())
-                : provider.error != null
-                    ? Center(child: Text("Error: ${provider.error}"))
-                    : provider.example2 == null
+                : coverarea.error != null
+                    ? Center(child: Text("Data not found"))
+                    : coverarea.example2 == null
                         ? const Center(child: Text("No data yet"))
                         : ListView.builder(
-                            itemCount: provider.example2!.coveredAreas.length,
+                            itemCount: coverarea.example2!.coveredAreas.length,
                             itemBuilder: (context, index) {
                               final item =
-                                  provider.example2!.coveredAreas[index];
+                                  coverarea.example2!.coveredAreas[index];
                               return Card(
                                 margin: const EdgeInsets.all(8),
                                 child: ListTile(

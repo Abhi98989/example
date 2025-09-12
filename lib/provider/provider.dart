@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import '../model/example1.dart';
 import '../model/example2.dart';
@@ -10,7 +10,7 @@ class ServiceProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? _error;
   String? get error => _error;
-  
+
   Example1? _example1;
   Example1? get example1 => _example1;
 
@@ -44,9 +44,10 @@ class ServiceProvider with ChangeNotifier {
     _error = null;
     notifyListeners();
     try {
-      final result = await ApiService.fetchCoveredAreas();
-      if (result != null) {
-        _example2 = result;
+      final response = await ApiService.fetchCoveredAreas();
+      if (response!.statusCode == 200 ) {
+        final data = jsonDecode(response.body);
+        _example2 = Example2.fromJson(data);
         notifyListeners();
       } else {
         _example2 = null;

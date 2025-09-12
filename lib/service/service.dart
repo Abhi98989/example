@@ -34,18 +34,14 @@ class ApiService {
   }
 
   //example 2
-  static Future<Example2?> fetchCoveredAreas() async {
+  static Future<http.Response?> fetchCoveredAreas() async {
     try {
       final response = await http.get(Uri.parse(url2));
-      if (response.statusCode == 200 ) {
-        final data = jsonDecode(response.body);
-        return Example2.fromJson(data);
-      } else {
-        return null;
-      }
+      log(response.body); 
+      return response;
     } catch (e) {
       log(e.toString());
-      return null;
     }
+    return null;
   }
 }
