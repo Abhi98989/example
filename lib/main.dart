@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/provider.dart';
 import 'screen/example1.dart';
-import 'screen/example2.dart';
+// import 'screen/example2.dart';
 
 void main() {
   runApp(
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const CoveredAreaScreen(),
+      home: const ServiceScreen(),
     );
   }
 }

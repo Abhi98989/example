@@ -14,13 +14,13 @@ class ServiceProvider with ChangeNotifier {
   Example1? _example1;
   Example1? get example1 => _example1;
 
-  Future<void> getServiceTypes() async {
+  Future<void> getServiceTypes( String apiKey) async {
     _isLoading = true;
     _error = null;
     notifyListeners();
 
     try {
-      final result = await ApiService.fetchServiceTypes();
+      final result = await ApiService.fetchServiceTypes( apiKey);
       if (result != null) {
         _example1 = result;
       } else {

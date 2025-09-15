@@ -2,23 +2,21 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 import '../model/example1.dart';
-import '../model/example2.dart';
 
 class ApiService {
   static const String _baseUrl =
       "https://developer.expoexpressnp.com/v1/AssignedServiceType";
-  static const String _apiKey = "e8d9fa85-1b77-4b98-92f0-2c097af03ed7";
   static const String url2 =
       "https://developer.expoexpressnp.com/v1/CoveredAreas/baglung";
   static const Map<String, String> _headers = {
     "Content-Type": "application/json",
   };
-  static Future<Example1?> fetchServiceTypes() async {
+  static Future<Example1?> fetchServiceTypes(String apiKey) async {
     try {
       final response = await http.post(
         Uri.parse(_baseUrl),
         headers: _headers,
-        body: jsonEncode({"APIKEY": _apiKey}),
+        body: jsonEncode({"APIKEY": apiKey}),
       );
 
       if (response.statusCode == 200) {
